@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1200px; height: 750px; overflow: hidden;
+    background: #ffffff;
+    font-family: 'Inter', -apple-system, sans-serif;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .left {
+    width: 420px;
+    background: #fff;
+    border-right: 1px solid #E5E3DF;
+    display: flex;
+    flex-direction: column;
+    padding: 28px 24px;
+  }
+  .app-name { font-size: 13px; font-weight: 600; color: #111; letter-spacing: -0.01em; }
+  .app-sub { font-size: 11px; color: #999; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px; }
+  .status-row { display: flex; align-items: center; gap: 6px; margin-top: 16px; margin-bottom: 20px; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; flex-shrink: 0; }
+  .status-text { font-size: 11px; color: #888; }
+
+  .chat { flex: 1; display: flex; flex-direction: column; gap: 12px; overflow: hidden; }
+  .bubble {
+    padding: 11px 14px;
+    border-radius: 10px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    max-width: 340px;
+  }
+  .bubble-user { background: #F0EEE9; color: #111; }
+  .bubble-ai { background: #111; color: #F8F7F4; }
+  .tags { display: flex; gap: 6px; margin-top: 4px; flex-wrap: wrap; }
+  .tag { font-size: 10px; padding: 2px 8px; border-radius: 100px; background: #FDF8EE; color: #B8A87A; border: 1px solid #EDE3CC; }
+
+  .input-row {
+    display: flex; gap: 10px; align-items: center;
+    margin-top: 16px; padding: 10px 14px;
+    border: 1px solid #E5E3DF; border-radius: 8px; background: #FAFAF8;
+  }
+  .input-text { font-size: 12px; color: #bbb; flex: 1; }
+  .send-btn { width: 28px; height: 28px; border-radius: 6px; background: #111; display: flex; align-items: center; justify-content: center; }
+  .send-btn::after { content: '↑'; color: #fff; font-size: 13px; }
+
+  .right { flex: 1; padding: 28px 28px; display: flex; flex-direction: column; gap: 14px; background: #FAFAF8; }
+  .panel-title { font-size: 10px; font-weight: 600; color: #111; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2px; }
+
+  .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .metric { padding: 14px 16px; border: 1px solid #E5E3DF; border-radius: 8px; background: #fff; }
+  .metric-label { font-size: 10px; color: #aaa; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 5px; }
+  .metric-value { font-size: 17px; font-weight: 600; color: #111; letter-spacing: -0.02em; }
+
+  .badge-amber { display: inline-block; padding: 2px 8px; border-radius: 100px; font-size: 10px; background: #FDF8EE; color: #B8A87A; border: 1px solid #EDE3CC; }
+
+  .divider { height: 1px; background: #E5E3DF; }
+
+  .qual-title { font-size: 10px; font-weight: 600; color: #111; letter-spacing: 0.1em; text-transform: uppercase; }
+  .qual-steps { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
+  .qual-step { display: flex; align-items: center; gap: 10px; }
+  .step-icon { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; flex-shrink: 0; }
+  .step-done { background: #dcfce7; color: #16a34a; }
+  .step-pending { background: #F0EEE9; color: #ccc; }
+  .step-label { font-size: 12px; color: #444; }
+  .step-label.muted { color: #ccc; }
+
+  .insight-box {
+    margin-top: auto;
+    padding: 14px 16px;
+    border: 1px solid #EDE3CC;
+    border-radius: 8px;
+    background: #FDF8EE;
+  }
+  .insight-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #B8A87A; margin-bottom: 5px; font-weight: 600; }
+  .insight-text { font-size: 12px; color: #666; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<div class="left">
+  <div class="app-name">Client Assistant</div>
+  <div class="app-sub">Active · Qualifying</div>
+  <div class="status-row"><span class="dot"></span><span class="status-text">Online · Integration mode</span></div>
+
+  <div class="chat">
+    <div>
+      <div class="bubble bubble-ai">Hi! I'm here to help you find the right solution. What kind of challenge are you trying to solve?</div>
+      <div class="tags" style="margin-top:6px"><span class="tag">Automation</span><span class="tag">Workflow</span><span class="tag">Integration</span></div>
+    </div>
+    <div>
+      <div class="bubble bubble-user">We process about 200 orders a week manually — it takes our team 3 days each time.</div>
+    </div>
+    <div>
+      <div class="bubble bubble-ai">Got it — sounds like a high-volume document workflow. A few quick questions to scope this properly: what format do the orders come in?</div>
+      <div class="tags" style="margin-top:6px"><span class="tag">PDF</span><span class="tag">Excel</span><span class="tag">Spreadsheet</span></div>
+    </div>
+    <div>
+      <div class="bubble bubble-user">Mix of PDF and email attachments mostly.</div>
+    </div>
+    <div>
+      <div class="bubble bubble-ai">Perfect. And roughly how many people are currently involved in processing each order end-to-end?</div>
+    </div>
+    <div>
+      <div class="bubble bubble-user">Usually 2–3 people, depending on complexity.</div>
+    </div>
+  </div>
+
+  <div class="input-row">
+    <span class="input-text">Type a message...</span>
+    <div class="send-btn"></div>
+  </div>
+</div>
+
+<div class="right">
+  <div class="panel-title">Qualified so far</div>
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">Volume</div>
+      <div class="metric-value">200 orders/wk</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Format</div>
+      <div class="metric-value" style="font-size:14px">PDF + Email</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Pain point</div>
+      <div class="metric-value" style="font-size:13px">3-day Turnaround</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Team size</div>
+      <div class="metric-value" style="font-size:13px">2–3 people</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="qual-title">Qualification flow</div>
+  <div class="qual-steps">
+    <div class="qual-step"><div class="step-icon step-done">✓</div><span class="step-label">Problem identified</span></div>
+    <div class="qual-step"><div class="step-icon step-done">✓</div><span class="step-label">Volume scoped</span></div>
+    <div class="qual-step"><div class="step-icon step-done">✓</div><span class="step-label">Format confirmed</span></div>
+    <div class="qual-step"><div class="step-icon step-done">✓</div><span class="step-label">Team size captured</span></div>
+    <div class="qual-step"><div class="step-icon step-pending">·</div><span class="step-label muted">Budget range</span></div>
+  </div>
+
+  <div class="insight-box">
+    <div class="insight-label">AI Signal</div>
+    <div class="insight-text">High-fit prospect — volume + manual process + mixed formats matches automation profile.</div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1200px; height: 750px; overflow: hidden;
+    background: #ffffff;
+    font-family: 'Inter', -apple-system, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 56px;
+  }
+
+  .header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    margin-bottom: 36px;
+  }
+  .header-num { font-size: 64px; font-weight: 800; color: #ECEAE5; letter-spacing: -0.04em; line-height: 1; }
+  .stats { display: flex; gap: 36px; align-items: flex-end; }
+  .stat { text-align: right; }
+  .stat-val { font-size: 28px; font-weight: 700; color: #111; letter-spacing: -0.03em; }
+  .stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: #aaa; margin-top: 3px; }
+
+  .flow { display: flex; align-items: center; margin-bottom: 32px; gap: 0; }
+  .flow-card {
+    flex: 1; padding: 20px 22px;
+    border: 1px solid #E5E3DF; border-radius: 10px; background: #FAFAF8;
+  }
+  .flow-card-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-bottom: 12px; }
+  .flow-line { height: 8px; background: #EDE8E0; border-radius: 4px; margin-bottom: 6px; }
+  .flow-line.s { width: 65%; }
+  .flow-line.m { width: 82%; }
+  .flow-line.l { width: 100%; }
+  .flow-badge {
+    display: inline-block; margin-top: 12px;
+    padding: 4px 10px; border-radius: 100px;
+    font-size: 10px; font-weight: 600;
+    background: #FDF8EE; color: #B8A87A; border: 1px solid #EDE3CC;
+  }
+
+  .arrow { display: flex; flex-direction: column; align-items: center; padding: 0 18px; gap: 4px; }
+  .arrow-line { width: 36px; height: 1.5px; background: #D5D2CC; }
+  .arrow-label { font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; color: #ccc; }
+  .arrow-head { font-size: 14px; color: #ccc; margin-left: -4px; }
+
+  .ai-node {
+    width: 68px; height: 68px; border-radius: 50%;
+    border: 2px solid #E5E3DF; background: #fff;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .ai-inner {
+    width: 34px; height: 34px; border-radius: 8px; background: #111;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; color: #fff; font-weight: 700;
+  }
+
+  .invoice-card {
+    flex: 1; padding: 20px 22px;
+    border: 1.5px solid #B8A87A; border-radius: 10px; background: #fff;
+  }
+  .invoice-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+  .invoice-id { font-size: 14px; font-weight: 700; color: #111; }
+  .auto-badge { padding: 3px 8px; border-radius: 100px; background: #FDF8EE; color: #B8A87A; font-size: 10px; font-weight: 600; border: 1px solid #EDE3CC; }
+  .inv-line { display: flex; justify-content: space-between; font-size: 12px; color: #555; padding: 7px 0; border-bottom: 1px solid #F0EEE9; }
+  .inv-total { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; color: #111; margin-top: 10px; padding-top: 10px; border-top: 2px solid #E5E3DF; }
+  .inv-total-val { color: #B8A87A; }
+
+  .bottom { display: flex; gap: 14px; }
+  .bottom-card {
+    flex: 1; padding: 16px 18px;
+    border: 1px solid #E5E3DF; border-radius: 8px; background: #FAFAF8;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .bottom-icon {
+    width: 34px; height: 34px; border-radius: 8px;
+    background: #FDF8EE; border: 1px solid #EDE3CC;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; flex-shrink: 0;
+  }
+  .bottom-title { font-size: 12px; font-weight: 600; color: #111; }
+  .bottom-sub { font-size: 11px; color: #aaa; margin-top: 1px; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-num">01</div>
+  <div class="stats">
+    <div class="stat"><div class="stat-val">94%</div><div class="stat-label">Faster</div></div>
+    <div class="stat"><div class="stat-val">0</div><div class="stat-label">Errors</div></div>
+    <div class="stat"><div class="stat-val">∞</div><div class="stat-label">Scale</div></div>
+  </div>
+</div>
+
+<div class="flow">
+  <div class="flow-card">
+    <div class="flow-card-title">Input · Raw Order</div>
+    <div class="flow-line l"></div>
+    <div class="flow-line m"></div>
+    <div class="flow-line l"></div>
+    <div class="flow-line s"></div>
+    <div class="flow-line m"></div>
+    <div class="flow-badge">PDF / Email</div>
+  </div>
+  <div class="arrow">
+    <div style="display:flex;align-items:center"><div class="arrow-line"></div><div class="arrow-head">→</div></div>
+    <div class="arrow-label">Extract</div>
+  </div>
+  <div class="ai-node"><div class="ai-inner">AI</div></div>
+  <div class="arrow">
+    <div style="display:flex;align-items:center"><div class="arrow-line"></div><div class="arrow-head">→</div></div>
+    <div class="arrow-label">Generate</div>
+  </div>
+  <div class="invoice-card">
+    <div class="invoice-header">
+      <div class="invoice-id">INV-2024-0147</div>
+      <div class="auto-badge">✓ Auto-generated</div>
+    </div>
+    <div class="inv-line"><span>Consulting Services</span><span>$4,200</span></div>
+    <div class="inv-line"><span>Platform License</span><span>$1,800</span></div>
+    <div class="inv-line"><span>Implementation</span><span>$950</span></div>
+    <div class="inv-total"><span>Total Due</span><span class="inv-total-val">$6,950</span></div>
+  </div>
+</div>
+
+<div class="bottom">
+  <div class="bottom-card">
+    <div class="bottom-icon">📄</div>
+    <div><div class="bottom-title">Any format</div><div class="bottom-sub">PDF, email, spreadsheet, scan</div></div>
+  </div>
+  <div class="bottom-card">
+    <div class="bottom-icon">⚡</div>
+    <div><div class="bottom-title">Instant</div><div class="bottom-sub">Seconds, not days</div></div>
+  </div>
+  <div class="bottom-card">
+    <div class="bottom-icon">✓</div>
+    <div><div class="bottom-title">Zero errors</div><div class="bottom-sub">Validated line-item accuracy</div></div>
+  </div>
+  <div class="bottom-card">
+    <div class="bottom-icon">∞</div>
+    <div><div class="bottom-title">Any scale</div><div class="bottom-sub">1 or 10,000 orders</div></div>
+  </div>
+</div>
+
+</body>
+</html>

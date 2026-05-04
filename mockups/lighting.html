@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1200px; height: 750px; overflow: hidden;
+    background: #ffffff;
+    font-family: 'Inter', -apple-system, sans-serif;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .left {
+    width: 220px;
+    background: #fff;
+    border-right: 1px solid #E5E3DF;
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .app-name { font-size: 14px; font-weight: 700; color: #111; letter-spacing: -0.01em; }
+  .app-sub { font-size: 10px; color: #B8A87A; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 2px; margin-bottom: 6px; }
+  .param-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; }
+  .param-field {
+    padding: 12px 14px;
+    border: 1px solid #E5E3DF;
+    border-radius: 6px;
+    background: #FAFAF8;
+  }
+  .param-name { font-size: 11px; color: #999; margin-bottom: 3px; }
+  .param-val { font-size: 16px; font-weight: 600; color: #111; letter-spacing: -0.01em; }
+  .param-bar { height: 3px; background: #E5E3DF; border-radius: 2px; margin-top: 8px; }
+  .param-fill { height: 100%; border-radius: 2px; background: #B8A87A; }
+
+  .center {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 40px;
+    background: #FAFAF8;
+  }
+  .dim-label { font-size: 11px; color: #aaa; letter-spacing: 0.06em; margin-bottom: 12px; }
+  .room {
+    position: relative;
+    width: 480px; height: 400px;
+    border: 2px solid #C8C4BE;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: inset 0 0 40px rgba(184,168,122,0.06);
+  }
+  .side-label {
+    position: absolute;
+    left: -36px; top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-size: 11px; color: #aaa; white-space: nowrap;
+  }
+  .fixture {
+    position: absolute;
+    width: 44px; height: 44px;
+    transform: translate(-50%, -50%);
+  }
+  .fixture-outer {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 2px solid #D5D2CC;
+    background: #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 0 18px 6px rgba(245,224,160,0.25);
+  }
+  .fixture-inner {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #F5E090;
+    border: 2px solid #D4B84A;
+    box-shadow: 0 0 10px 4px rgba(212,184,74,0.35);
+  }
+  .footer-note {
+    margin-top: 14px;
+    font-size: 10px; color: #ccc;
+    letter-spacing: 0.08em; text-transform: uppercase;
+  }
+
+  .right {
+    width: 220px;
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left: 1px solid #E5E3DF;
+  }
+  .output-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-bottom: 4px; }
+  .output-card {
+    padding: 14px 16px;
+    border: 1px solid #E5E3DF;
+    border-radius: 8px;
+    background: #fff;
+  }
+  .output-card.highlight { border-color: #B8A87A; background: #FDF8EE; }
+  .output-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #aaa; margin-bottom: 6px; }
+  .output-val { font-size: 28px; font-weight: 700; color: #111; letter-spacing: -0.03em; line-height: 1; }
+  .output-val span { font-size: 13px; font-weight: 400; color: #888; }
+  .output-sub { font-size: 10px; color: #aaa; margin-top: 4px; }
+  .output-sub.good { color: #B8A87A; font-weight: 500; }
+
+  .efficiency {
+    margin-top: auto;
+    padding: 12px 14px;
+    border: 1px solid #EDE3CC;
+    border-radius: 8px;
+    background: #FDF8EE;
+  }
+  .eff-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: #B8A87A; font-weight: 600; margin-bottom: 4px; }
+  .eff-val { font-size: 12px; color: #666; }
+</style>
+</head>
+<body>
+
+<div class="left">
+  <div>
+    <div class="app-name">Lighting Layout Tool</div>
+    <div class="app-sub">Optimal Placement · Auto</div>
+  </div>
+
+  <div class="param-label">Room Parameters</div>
+
+  <div class="param-field">
+    <div class="param-name">Room Size</div>
+    <div class="param-val">24 × 18 ft</div>
+    <div class="param-bar"><div class="param-fill" style="width:70%"></div></div>
+  </div>
+  <div class="param-field">
+    <div class="param-name">Target Lux</div>
+    <div class="param-val">400 lx</div>
+    <div class="param-bar"><div class="param-fill" style="width:55%"></div></div>
+  </div>
+  <div class="param-field">
+    <div class="param-name">Ceiling Height</div>
+    <div class="param-val">9 ft</div>
+    <div class="param-bar"><div class="param-fill" style="width:40%"></div></div>
+  </div>
+  <div class="param-field">
+    <div class="param-name">Fixture Type</div>
+    <div class="param-val" style="font-size:13px">LED Recessed</div>
+  </div>
+</div>
+
+<div class="center">
+  <div class="dim-label">24 FT</div>
+  <div class="room">
+    <div class="side-label">18 FT</div>
+    <div class="fixture" style="left:25%;top:25%"><div class="fixture-outer"><div class="fixture-inner"></div></div></div>
+    <div class="fixture" style="left:50%;top:25%"><div class="fixture-outer"><div class="fixture-inner"></div></div></div>
+    <div class="fixture" style="left:75%;top:25%"><div class="fixture-outer"><div class="fixture-inner"></div></div></div>
+    <div class="fixture" style="left:25%;top:50%"><div class="fixture-outer"><div class="fixture-inner"></div></div></div>
+    <div class="fixture" style="left:50%;top:50%"><div class="fixture-outer"><div class="fixture-inner"></div></div></div>
+    <div class="fixture" style="left:75%;top:50%"><div class="fixture-outer"><div class="fixture-inner"></div></div></div>
+    <div class="fixture" style="left:25%;top:75%"><div class="fixture-outer"><div class="fixture-inner"></div></div></div>
+    <div class="fixture" style="left:50%;top:75%"><div class="fixture-outer"><div class="fixture-inner"></div></div></div>
+    <div class="fixture" style="left:75%;top:75%"><div class="fixture-outer"><div class="fixture-inner"></div></div></div>
+  </div>
+  <div class="footer-note">Auto-calculates fixture count and placement</div>
+</div>
+
+<div class="right">
+  <div class="output-label">Output</div>
+  <div class="output-card highlight">
+    <div class="output-title">Fixtures Needed</div>
+    <div class="output-val">9 <span>units</span></div>
+    <div class="output-sub">3 × 3 grid pattern</div>
+  </div>
+  <div class="output-card">
+    <div class="output-title">Coverage</div>
+    <div class="output-val">98<span>%</span></div>
+    <div class="output-sub good">Uniform ✓</div>
+  </div>
+  <div class="output-card">
+    <div class="output-title">Avg Illuminance</div>
+    <div class="output-val">412 <span>lx</span></div>
+    <div class="output-sub good">Target met ✓</div>
+  </div>
+  <div class="efficiency">
+    <div class="eff-label">Efficiency</div>
+    <div class="eff-val">Replaces ~4 hrs of manual estimation</div>
+  </div>
+</div>
+
+</body>
+</html>
